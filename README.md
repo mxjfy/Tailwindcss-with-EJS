@@ -1,90 +1,82 @@
 
-# Guide
+# Tailwind CSS Integration with EJS
 
-Here's How you can Install Tailwindcss with EJS Template Engine
+A brief description of what this project does and who it's for
 
 
-## Packages Installation
+## Prerequisites
 
-Initialize Project and install Express and EJS
+Node.js and npm installed on your system
+Steps
 
-```bash
-  npm init -y
-  npm i express ejs
-```
+## Steps:-
+### 1. Create a New Node.js Project
 
-## (Optional) ES6 Usage
-
-. I am using ES6 Synatax you can use the older version
+You can use npm or yarn, I used npm
 
 ```bash
-  In "Package.json" Add the Following code
-  
-  "type": "module"   // After "license": "ISC"
+mkdir my-project
+cd my-project
+npm init -y
+
 ```
-## Create Folders
+
+### 2. Install Tailwind CSS and EJS
 
 ```bash
-  mkdir views
-  cd views
-  mkdir partials
-
-  mkdir public
-  cd public
-  mkdir css
-```
-
-
-## Create 2 Files in css folder
-```bash
-  input.css
-  output.css
-```
-
-
-## Create .ejs Files in views folder
-```bash
-  # Don't Forget to Add HTML Code
-
-  /partials/Header.ejs
-  /partials/Footer.ejs
-  
-  template.
-```
-## Link output.css in Header.ejs
-
-```html
-<link rel="stylesheet" href="/css/output.css">
-```
-## Initialize path in app.js
-
-```javascript
-// ES6
-app.use(Express.static(path.join(process.cwd(), 'public')));
-```
-
-## Tailwindcss Installation
-
-```bash
-npm install tailwindcss postcss autoprefixer
+npm install ejs tailwindcss postcss autoprefixer
 npx tailwindcss init
+
 ```
 
-## Add Tailwindcss code
+### 3. Create Two CSS Files
+input.css and output.css in /public/css
 
 ```bash
-In input.css
+npm install ejs tailwindcss postcss autoprefixer
+npx tailwindcss init
+
+```
+
+### 4. Config tailwindcss
+
+```bash
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./views/**/*.ejs"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+```
+### 5. Define Tailwind CSS in Input CSS
+
+Let the output.css empty
+```bash
+/* public/css/input.css */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
 
+### 6. Create a Watch Script
 
-## In packge.json Add Script
+Open package.json and add below Script
 
-```bash
-# CAREFULLY add the css file path
+```bash// package.json
+"scripts": {
+    "style": "npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
+}
+```
 
-npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch
+### 7. Run Project 🚀
+Now run development Server and Tailwind watch script
+
+
+```bash// package.json
+nodemon app.js
+npm run style
 ```
